@@ -1,175 +1,155 @@
-<html>
-<head>
-<title>Main.java</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<style type="text/css">
-.s0 { color: #cc7832;}
-.s1 { color: #a9b7c6;}
-.s2 { color: #6897bb;}
-.s3 { color: #808080;}
-.s4 { color: #6a8759;}
-</style>
-</head>
-<body bgcolor="#2b2b2b">
-<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
-<tr><td><center>
-<font face="Arial, Helvetica" color="#000000">
-Main.java</font>
-</center></td></tr></table>
-<pre><span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s0">;</span>
-<span class="s0">class </span><span class="s1">Employee {</span>
-    <span class="s0">protected </span><span class="s1">String name</span><span class="s0">;</span>
-    <span class="s0">protected </span><span class="s1">String surname</span><span class="s0">;</span>
-    <span class="s0">protected </span><span class="s1">String address</span><span class="s0">;</span>
-    <span class="s0">protected </span><span class="s1">String email</span><span class="s0">;</span>
-    <span class="s0">protected </span><span class="s1">String PESEL</span><span class="s0">;</span>
-    <span class="s0">protected int </span><span class="s1">yearOfEmployment</span><span class="s0">;</span>
+import java.util.ArrayList;
+class Employee {
+    protected String name;
+    protected String surname;
+    protected String address;
+    protected String email;
+    protected String PESEL;
+    protected int yearOfEmployment;
 
-    <span class="s0">public </span><span class="s1">Employee(String name</span><span class="s0">, </span><span class="s1">String surname</span><span class="s0">, </span><span class="s1">String address</span><span class="s0">, </span><span class="s1">String email</span><span class="s0">, </span><span class="s1">String PESEL</span><span class="s0">, int </span><span class="s1">yearOfEmployment) {</span>
-        <span class="s0">this</span><span class="s1">.name = name</span><span class="s0">;</span>
-        <span class="s0">this</span><span class="s1">.surname = surname</span><span class="s0">;</span>
-        <span class="s0">this</span><span class="s1">.address = address</span><span class="s0">;</span>
-        <span class="s0">this</span><span class="s1">.email = email</span><span class="s0">;</span>
-        <span class="s0">this</span><span class="s1">.PESEL = PESEL</span><span class="s0">;</span>
-        <span class="s0">this</span><span class="s1">.yearOfEmployment = yearOfEmployment</span><span class="s0">;</span>
-    <span class="s1">}</span>
+    public Employee(String name, String surname, String address, String email, String PESEL, int yearOfEmployment) {
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.email = email;
+        this.PESEL = PESEL;
+        this.yearOfEmployment = yearOfEmployment;
+    }
 
-    <span class="s0">public int </span><span class="s1">calculateBaseSalary() {</span>
-        <span class="s0">return </span><span class="s2">3000 </span><span class="s1">+ (</span><span class="s2">1000 </span><span class="s1">* (</span><span class="s2">2024 </span><span class="s1">- yearOfEmployment))</span><span class="s0">;</span>
-    <span class="s1">}</span>
+    public int calculateBaseSalary() {
+        return 3000 + (1000 * (2024 - yearOfEmployment));
+    }
 
-    <span class="s0">public int </span><span class="s1">calculateSalary() {</span>
-        <span class="s0">return </span><span class="s1">calculateBaseSalary()</span><span class="s0">;</span>
-    <span class="s1">}</span>
-<span class="s1">}</span>
+    public int calculateSalary() {
+        return calculateBaseSalary();
+    }
+}
 
-<span class="s3">// Deweloper</span>
-<span class="s0">class </span><span class="s1">Developer </span><span class="s0">extends </span><span class="s1">Employee {</span>
-    <span class="s0">private </span><span class="s1">ArrayList&lt;Technology&gt; knownTechnologies = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s0">;</span>
+// Deweloper
+class Developer extends Employee {
+    private ArrayList<Technology> knownTechnologies = new ArrayList<>();
 
-    <span class="s0">public </span><span class="s1">Developer(String name</span><span class="s0">, </span><span class="s1">String surname</span><span class="s0">, </span><span class="s1">String address</span><span class="s0">, </span><span class="s1">String email</span><span class="s0">, </span><span class="s1">String PESEL</span><span class="s0">, int </span><span class="s1">yearOfEmployment) {</span>
-        <span class="s0">super</span><span class="s1">(name</span><span class="s0">, </span><span class="s1">surname</span><span class="s0">, </span><span class="s1">address</span><span class="s0">, </span><span class="s1">email</span><span class="s0">, </span><span class="s1">PESEL</span><span class="s0">, </span><span class="s1">yearOfEmployment)</span><span class="s0">;</span>
-    <span class="s1">}</span>
+    public Developer(String name, String surname, String address, String email, String PESEL, int yearOfEmployment) {
+        super(name, surname, address, email, PESEL, yearOfEmployment);
+    }
 
-    <span class="s0">public void </span><span class="s1">addTechnology(Technology technology) {</span>
-        <span class="s1">knownTechnologies.add(technology)</span><span class="s0">;</span>
-    <span class="s1">}</span>
+    public void addTechnology(Technology technology) {
+        knownTechnologies.add(technology);
+    }
 
-    <span class="s1">@Override</span>
-    <span class="s0">public int </span><span class="s1">calculateSalary() {</span>
-        <span class="s0">int </span><span class="s1">salary = </span><span class="s0">super</span><span class="s1">.calculateBaseSalary()</span><span class="s0">;</span>
-        <span class="s0">for </span><span class="s1">(Technology tech : knownTechnologies) {</span>
-            <span class="s1">salary += tech.getBonus()</span><span class="s0">;</span>
-        <span class="s1">}</span>
-        <span class="s0">return </span><span class="s1">salary</span><span class="s0">;</span>
-    <span class="s1">}</span>
-<span class="s1">}</span>
+    @Override
+    public int calculateSalary() {
+        int salary = super.calculateBaseSalary();
+        for (Technology tech : knownTechnologies) {
+            salary += tech.getBonus();
+        }
+        return salary;
+    }
+}
 
-<span class="s0">class </span><span class="s1">Technology {</span>
-    <span class="s0">private </span><span class="s1">String name</span><span class="s0">;</span>
-    <span class="s0">private int </span><span class="s1">bonus</span><span class="s0">;</span>
+class Technology {
+    private String name;
+    private int bonus;
 
-    <span class="s0">public </span><span class="s1">Technology(String name</span><span class="s0">, int </span><span class="s1">bonus) {</span>
-        <span class="s0">this</span><span class="s1">.name = name</span><span class="s0">;</span>
-        <span class="s0">this</span><span class="s1">.bonus = bonus</span><span class="s0">;</span>
-    <span class="s1">}</span>
+    public Technology(String name, int bonus) {
+        this.name = name;
+        this.bonus = bonus;
+    }
 
-    <span class="s0">public int </span><span class="s1">getBonus() {</span>
-        <span class="s0">return </span><span class="s1">bonus</span><span class="s0">;</span>
-    <span class="s1">}</span>
-<span class="s1">}</span>
-<span class="s0">class </span><span class="s1">Tester </span><span class="s0">extends </span><span class="s1">Employee {</span>
-    <span class="s0">private </span><span class="s1">ArrayList&lt;String&gt; testTypes = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s0">;</span>
+    public int getBonus() {
+        return bonus;
+    }
+}
+class Tester extends Employee {
+    private ArrayList<String> testTypes = new ArrayList<>();
 
-    <span class="s0">public </span><span class="s1">Tester(String name</span><span class="s0">, </span><span class="s1">String surname</span><span class="s0">, </span><span class="s1">String address</span><span class="s0">, </span><span class="s1">String email</span><span class="s0">, </span><span class="s1">String PESEL</span><span class="s0">, int </span><span class="s1">yearOfEmployment) {</span>
-        <span class="s0">super</span><span class="s1">(name</span><span class="s0">, </span><span class="s1">surname</span><span class="s0">, </span><span class="s1">address</span><span class="s0">, </span><span class="s1">email</span><span class="s0">, </span><span class="s1">PESEL</span><span class="s0">, </span><span class="s1">yearOfEmployment)</span><span class="s0">;</span>
-    <span class="s1">}</span>
+    public Tester(String name, String surname, String address, String email, String PESEL, int yearOfEmployment) {
+        super(name, surname, address, email, PESEL, yearOfEmployment);
+    }
 
-    <span class="s0">public void </span><span class="s1">addTestType(String testType) {</span>
-        <span class="s1">testTypes.add(testType)</span><span class="s0">;</span>
-    <span class="s1">}</span>
-    <span class="s1">@Override</span>
-    <span class="s0">public int </span><span class="s1">calculateSalary() {</span>
-        <span class="s0">return super</span><span class="s1">.calculateBaseSalary() + (</span><span class="s2">300 </span><span class="s1">* testTypes.size())</span><span class="s0">;</span>
-    <span class="s1">}</span>
-<span class="s1">}</span>
+    public void addTestType(String testType) {
+        testTypes.add(testType);
+    }
+    @Override
+    public int calculateSalary() {
+        return super.calculateBaseSalary() + (300 * testTypes.size());
+    }
+}
 
 
-<span class="s0">class </span><span class="s1">Manager </span><span class="s0">extends </span><span class="s1">Employee {</span>
-    <span class="s0">private </span><span class="s1">ArrayList&lt;Goal&gt; goals = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s0">;</span>
+class Manager extends Employee {
+    private ArrayList<Goal> goals = new ArrayList<>();
 
-    <span class="s0">public </span><span class="s1">Manager(String name</span><span class="s0">, </span><span class="s1">String surname</span><span class="s0">, </span><span class="s1">String address</span><span class="s0">, </span><span class="s1">String email</span><span class="s0">, </span><span class="s1">String PESEL</span><span class="s0">, int </span><span class="s1">yearOfEmployment) {</span>
-        <span class="s0">super</span><span class="s1">(name</span><span class="s0">, </span><span class="s1">surname</span><span class="s0">, </span><span class="s1">address</span><span class="s0">, </span><span class="s1">email</span><span class="s0">, </span><span class="s1">PESEL</span><span class="s0">, </span><span class="s1">yearOfEmployment)</span><span class="s0">;</span>
-    <span class="s1">}</span>
+    public Manager(String name, String surname, String address, String email, String PESEL, int yearOfEmployment) {
+        super(name, surname, address, email, PESEL, yearOfEmployment);
+    }
 
-    <span class="s0">public void </span><span class="s1">addGoal(Goal goal) {</span>
-        <span class="s1">goals.add(goal)</span><span class="s0">;</span>
-    <span class="s1">}</span>
+    public void addGoal(Goal goal) {
+        goals.add(goal);
+    }
 
-    <span class="s1">@Override</span>
-    <span class="s0">public int </span><span class="s1">calculateSalary() {</span>
-        <span class="s0">int </span><span class="s1">salary = </span><span class="s0">super</span><span class="s1">.calculateBaseSalary()</span><span class="s0">;</span>
-        <span class="s0">for </span><span class="s1">(Goal goal : goals) {</span>
-            <span class="s0">if </span><span class="s1">(goal.isAchieved()) {</span>
-                <span class="s1">salary += goal.getBonusAmount()</span><span class="s0">;</span>
-            <span class="s1">}</span>
-        <span class="s1">}</span>
-        <span class="s0">return </span><span class="s1">salary</span><span class="s0">;</span>
-    <span class="s1">}</span>
-<span class="s1">}</span>
-<span class="s0">class </span><span class="s1">Goal {</span>
-    <span class="s0">private int </span><span class="s1">year</span><span class="s0">;</span>
-    <span class="s0">private int </span><span class="s1">month</span><span class="s0">;</span>
-    <span class="s0">private int </span><span class="s1">day</span><span class="s0">;</span>
-    <span class="s0">private </span><span class="s1">String name</span><span class="s0">;</span>
-    <span class="s0">private int </span><span class="s1">bonusAmount</span><span class="s0">;</span>
+    @Override
+    public int calculateSalary() {
+        int salary = super.calculateBaseSalary();
+        for (Goal goal : goals) {
+            if (goal.isAchieved()) {
+                salary += goal.getBonusAmount();
+            }
+        }
+        return salary;
+    }
+}
+class Goal {
+    private int year;
+    private int month;
+    private int day;
+    private String name;
+    private int bonusAmount;
 
-    <span class="s0">public </span><span class="s1">Goal(</span><span class="s0">int </span><span class="s1">year</span><span class="s0">, int </span><span class="s1">month</span><span class="s0">, int </span><span class="s1">day</span><span class="s0">, </span><span class="s1">String name</span><span class="s0">, int </span><span class="s1">bonusAmount) {</span>
-        <span class="s0">this</span><span class="s1">.year = year</span><span class="s0">;</span>
-        <span class="s0">this</span><span class="s1">.month = month</span><span class="s0">;</span>
-        <span class="s0">this</span><span class="s1">.day = day</span><span class="s0">;</span>
-        <span class="s0">this</span><span class="s1">.name = name</span><span class="s0">;</span>
-        <span class="s0">this</span><span class="s1">.bonusAmount = bonusAmount</span><span class="s0">;</span>
-
-
-    <span class="s1">}</span>
-
-    <span class="s0">public boolean </span><span class="s1">isAchieved() {</span>
-        <span class="s0">return </span><span class="s1">year &lt;= </span><span class="s2">2024 </span><span class="s1">&amp;&amp; month &lt;= </span><span class="s2">5</span><span class="s0">;</span>
-    <span class="s1">}</span>
-
-    <span class="s0">public int </span><span class="s1">getBonusAmount() {</span>
-        <span class="s0">return </span><span class="s1">bonusAmount</span><span class="s0">;</span>
-    <span class="s1">}</span>
-<span class="s1">}</span>
-
-<span class="s0">public class </span><span class="s1">Program {</span>
-    <span class="s0">public static void </span><span class="s1">main(String[] args) {</span>
-        <span class="s1">ArrayList&lt;Employee&gt; employees = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s0">;</span>
-
-        <span class="s1">Developer dev = </span><span class="s0">new </span><span class="s1">Developer(</span><span class="s4">&quot;John&quot;</span><span class="s0">, </span><span class="s4">&quot;Doe&quot;</span><span class="s0">, </span><span class="s4">&quot;New York&quot;</span><span class="s0">, </span><span class="s4">&quot;john@doe.com&quot;</span><span class="s0">, </span><span class="s4">&quot;123456789&quot;</span><span class="s0">, </span><span class="s2">2020</span><span class="s1">)</span><span class="s0">;</span>
-        <span class="s1">Technology t = </span><span class="s0">new </span><span class="s1">Technology(</span><span class="s4">&quot;Java&quot;</span><span class="s0">, </span><span class="s2">800</span><span class="s1">)</span><span class="s0">;</span>
-        <span class="s1">dev.addTechnology(t)</span><span class="s0">;</span>
-        <span class="s1">employees.add(dev)</span><span class="s0">;</span>
+    public Goal(int year, int month, int day, String name, int bonusAmount) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        this.name = name;
+        this.bonusAmount = bonusAmount;
 
 
-        <span class="s1">Tester tester = </span><span class="s0">new </span><span class="s1">Tester(</span><span class="s4">&quot;Jane&quot;</span><span class="s0">, </span><span class="s4">&quot;Smith&quot;</span><span class="s0">, </span><span class="s4">&quot;Los Angeles&quot;</span><span class="s0">, </span><span class="s4">&quot;jane@smith.com&quot;</span><span class="s0">, </span><span class="s4">&quot;987654321&quot;</span><span class="s0">, </span><span class="s2">2021</span><span class="s1">)</span><span class="s0">;</span>
-        <span class="s1">tester.addTestType(</span><span class="s4">&quot;UI/UX&quot;</span><span class="s1">)</span><span class="s0">;</span>
-        <span class="s1">employees.add(tester)</span><span class="s0">;</span>
+    }
+
+    public boolean isAchieved() {
+        return year <= 2024 && month <= 5;
+    }
+
+    public int getBonusAmount() {
+        return bonusAmount;
+    }
+}
+
+public class Program {
+    public static void main(String[] args) {
+        ArrayList<Employee> employees = new ArrayList<>();
+
+        Developer dev = new Developer("John", "Doe", "New York", "john@doe.com", "123456789", 2020);
+        Technology t = new Technology("Java", 800);
+        dev.addTechnology(t);
+        employees.add(dev);
 
 
-        <span class="s1">Manager manager = </span><span class="s0">new </span><span class="s1">Manager(</span><span class="s4">&quot;Bob&quot;</span><span class="s0">, </span><span class="s4">&quot;Johnson&quot;</span><span class="s0">, </span><span class="s4">&quot;Chicago&quot;</span><span class="s0">, </span><span class="s4">&quot;bob@johnson.com&quot;</span><span class="s0">, </span><span class="s4">&quot;1122334455&quot;</span><span class="s0">, </span><span class="s2">2019</span><span class="s1">)</span><span class="s0">;</span>
-        <span class="s1">Goal g = </span><span class="s0">new </span><span class="s1">Goal(</span><span class="s2">2010</span><span class="s0">, </span><span class="s2">10</span><span class="s0">, </span><span class="s2">15</span><span class="s0">, </span><span class="s4">&quot;Implementing FB login&quot;</span><span class="s0">, </span><span class="s2">1000</span><span class="s1">)</span><span class="s0">;</span>
-        <span class="s1">manager.addGoal(g)</span><span class="s0">;</span>
-        <span class="s1">employees.add(manager)</span><span class="s0">;</span>
+        Tester tester = new Tester("Jane", "Smith", "Los Angeles", "jane@smith.com", "987654321", 2021);
+        tester.addTestType("UI/UX");
+        employees.add(tester);
 
-        <span class="s3">// wypłata</span>
-        <span class="s0">int </span><span class="s1">totalAmount = </span><span class="s2">0</span><span class="s0">;</span>
-        <span class="s0">for </span><span class="s1">(Employee employee : employees) {</span>
-            <span class="s1">totalAmount += employee.calculateSalary()</span><span class="s0">;</span>
-        <span class="s1">}</span>
-        <span class="s1">System.out.println(</span><span class="s4">&quot;Total amount to be paid this month: &quot; </span><span class="s1">+ totalAmount + </span><span class="s4">&quot; USD&quot;</span><span class="s1">)</span><span class="s0">;</span>
-    <span class="s1">}</span>
-<span class="s1">}</span></pre>
-</body>
-</html>
+
+        Manager manager = new Manager("Bob", "Johnson", "Chicago", "bob@johnson.com", "1122334455", 2019);
+        Goal g = new Goal(2010, 10, 15, "Implementing FB login", 1000);
+        manager.addGoal(g);
+        employees.add(manager);
+
+        // wypłata
+        int totalAmount = 0;
+        for (Employee employee : employees) {
+            totalAmount += employee.calculateSalary();
+        }
+        System.out.println("Total amount to be paid this month: " + totalAmount + " USD");
+    }
+}
